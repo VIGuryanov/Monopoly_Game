@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.GamePage"
+             BackgroundImageSource="table.jpg">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="600*" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image
+            Grid.Column="0"
+            Grid.Row="0"
+            Source="monopoly.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            Margin="10"
+            VerticalOptions="Start"
+            HorizontalOptions="Center" />        
+    </Grid>
+</ContentPage>
