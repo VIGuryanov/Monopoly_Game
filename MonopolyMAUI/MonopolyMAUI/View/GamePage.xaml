@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:MonopolyMAUI.Models"
+             xmlns:view="clr-namespace:MonopolyMAUI.ViewModel"
+             x:Class="MonopolyMAUI.View.GamePage"
+             x:DataType="view:GameViewModel"
+             BackgroundColor="#262c2f"
+             Title="GamePage"
+             >
+    <ContentPage.Resources>
+        <LayoutOptions x:Key="horzOptions"
+                       Alignment="Center" />
+        <LayoutOptions x:Key="vertOptions"
+                       Alignment="Center" />
+        <x:Double x:Key="borderWidth">3</x:Double>
+        <x:Double x:Key="fontSize">24</x:Double>
+        <x:Double x:Key="margin">20</x:Double>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Label Text="ПЕРЕДЕЛАТЬ ПОД MVVM(Binding Players) И СЕРВЕР" TextColor="Red"/>
+        <CollectionView HorizontalOptions="Start" VerticalOptions="Start">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type model:User}">
+                    <model:User
+                        Nickname="Zancrow"
+                        Color="Red"
+                        Id="01"/>
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:User">
+                    <HorizontalStackLayout>
+                        <Image/>
+                        <VerticalStackLayout Padding="10" Spacing="5">
+                            <Label Text="{Binding Nickname}" FontSize="20" TextColor="{Binding Color}"/>
+                            <Label Text="{Binding Amount}" FontSize="10" TextColor="White"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView> 
+    
+        <Grid HorizontalOptions="Center" VerticalOptions="Center" Padding="10" ColumnSpacing="3" RowSpacing="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Start">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Start_Players">
+                        
+                    </VerticalStackLayout>
+                    <Image Source="Start.png"
+                           BackgroundColor="White" 
+                           ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Column="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Old_Road">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Old_Road_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Road.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Old_Road_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Old_Road_Building">
+
+                        </HorizontalStackLayout>
+                        
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Treasury">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Treasury_Players">
+                    </VerticalStackLayout>
+                    
+                    <Image Source="Treasury.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Highway">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Highway_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Highway.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Highway_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Highway_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Tax">
+                <Grid HorizontalOptions="Center"
+                      Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Tax_Players">
+                        
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Tax.png" ZIndex="-1" x:Name="Taxc"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="5" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="West_SeaPort">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="West_SeaPort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="West_SeaPort_Realty">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="AquaPark">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="AquaPark_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Aqua_Park.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="AquaPark_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="AquaPark_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Question">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Question_Players">
+                    </VerticalStackLayout>
+
+                    <Image Source="Question.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="8" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="CityPark">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="CityPark_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Park.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="CityPark_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="CityPark_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="SkiResort">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="SkiResort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Ski_Resort.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="SkiResort_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="SkiResort_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Prison" Grid.Column="10">
+                <Grid Padding="0" >
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Prison_Players">
+                    </VerticalStackLayout>
+                    <Image Source="prison.png"
+                           BackgroundColor="White" 
+                           ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Hotel_Resort">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Hotel_Resort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Hotel_Resort.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Hotel_Resort_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Hotel_Resort_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Row="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Purchase">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Purchase_Players">
+                    </VerticalStackLayout>
+
+                    <Image Source="purchase.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Resort">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Resort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Resort.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Resort_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Resort_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Question1">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Question1_Players">
+                    </VerticalStackLayout>
+
+                    <Image Source="question.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="South_SeaPort">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="South_SeaPort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="South_SeaPort_Realty">
+                        
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Plane">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Plane_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Plane.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Plane_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Plane_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Treasury1">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Treasury1_Players">
+                    </VerticalStackLayout>
+                    
+                    <Image Source="treasury.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="8" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Train">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Train_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Train.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Train_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Train_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Ship">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Ship_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Cargo_Ship.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Ship_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Ship_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Police">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Police_Players">
+
+                    </VerticalStackLayout>
+                    <Image Source="Police_Station.png"
+                           BackgroundColor="White" 
+                           ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Social">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Social_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Social_Housing.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Social_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Social_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Column="10" Grid.Row="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Electricity_Company">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Electricity_Company_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Electricity_Company.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Electricity_Company_Realty">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Busyness">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Busyness_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Busyness_Quarter.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Busyness_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Busyness_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="MarketPlace">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="MarketPlace_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Marketplace.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="MarketPlace_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="MarketPlace_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="5" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="North_SeaPort">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="North_SeaPort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="North_SeaPort_Realty">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Pushkin_Street">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Pushkin_Street_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Pushkina_Street.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Pushkin_Street_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Pushkin_Street_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Treasury2">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Treasury2_Players">
+                    </VerticalStackLayout>
+
+                    <Image Source="Treasury.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="8" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Prospect_Mira">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Prospect_Mira_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Prospect_Mira.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Prospect_Mira_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Prospect_Mira_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="10" Grid.Row="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Prospect_Pobedy">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Prospect_Pobedy_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Prospect_Pobedy.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Prospect_Pobedy_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Prospect_Pobedy_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Parking" Grid.Column="10" Grid.Row="10">
+                <Grid Padding="0" >
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Parking_Players">
+                    </VerticalStackLayout>
+                    <Image Source="Parking.png"
+                           BackgroundColor="White" 
+                           ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Smartphone">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Smartphone_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Smartphone.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Smartphone_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Smartphone_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Water_Company">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Water_Company_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Water_Company.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Water_Company_Realty">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Internet">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Internet_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Internet.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Internet_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Internet_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Computers">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Computers_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Computer.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Computers_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Computers_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="5" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="East_SeaPort">
+                <Grid 
+                HorizontalOptions="Center"
+                Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="East_SeaPort_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="East_SeaPort_Realty">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Restaurant">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Restaurant_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Restaurant.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Restaurant_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Restaurant_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Night_Club">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Night_Club_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Night_Club.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Night_Club_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Night_Club_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="8"  Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Question2">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Question2_Players">
+                    </VerticalStackLayout>
+
+                    <Image Source="Question.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Pub">
+                <Grid Padding="0">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Pub_Players">
+
+                    </VerticalStackLayout>
+                    <ImageButton Pressed="OnPressedImageButton" Source="Pub.png" ZIndex="-1"/>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Pub_Realty">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Bar_Building">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+    
+</ContentPage>
