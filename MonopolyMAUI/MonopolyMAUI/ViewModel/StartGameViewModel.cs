@@ -1,14 +1,27 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MonopolyMAUI.Models;
+using MonopolyMAUI.Services;
 using MonopolyMAUI.View;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MonopolyMAUI.ViewModel;
 
 public partial class StartGameViewModel : BaseViewModel
 {
-    public ObservableCollection<User> Players { get; set; } = new();
+    [ObservableProperty]    
+    
+    public ObservableCollection<User> players = new();
+
+    public PlayerService playerService;
+
+    public StartGameViewModel() { }
+
+    public StartGameViewModel(PlayerService playerService)
+    {
+        this.playerService = playerService;
+    }
 
     [ObservableProperty]
     string userName;
@@ -45,11 +58,56 @@ public partial class StartGameViewModel : BaseViewModel
         //И здесь нужно продумать добавление игроков в список на странице игры(В видосике про MVVM или навигации говорилось про это)
         //(и потом просто сделать уже на странице игры кнопку "ГОТОВ")
         //Players = await ...
-        Players.Add(new User() { Nickname = UserName});
-        //TODO: ПЕРЕДЕЛАТЬ ПОД MVVM(Binding Players) И СЕРВЕР
-        await Shell.Current.GoToAsync(nameof(GamePage),true, new Dictionary<string, object> {
-            {"Players", Players}
-        });
-        //UserName = string.Empty;
+        try
+        {
+            IsBusy = true;
+            Players.Add(new User() { Nickname = UserName });
+            //var players = await playerService.GetPlayersFromJsonAsync();/*Наверное,вот тут нужно ответ с сервера*/
+            //Сделать анимацию в StartGame.xaml.cs
+            /*if (Players.Count > 0)
+                Players.Clear();
+            foreach (var player in players)
+                Players.Add(player);*/
+            await Shell.Current.GoToAsync(nameof(GamePage), new Dictionary<string, object> 
+            {
+                {"Players", Players}
+            });
+        }
+        catch (Exception ex)
+        {
+
+            Debug.WriteLine($"Unable to get players: {ex.Message}");
+            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
+
+    /*[RelayCommand]
+    async Task GetPlayersAsync()
+    {
+        try
+        {
+            var players = await playerService.GetPlayersFromJsonAsync();
+            if (players?.Count != 0)
+                Players.Clear();
+
+            foreach (var player in players)
+                Players.Add(player);
+        }
+        catch (Exception ex)
+        {
+#if DEBUG
+            Debug.WriteLine(ex);
+#endif
+            //Этого делать не следует!, просто в качестве примера
+            await Shell.Current.DisplayAlert("Error!", $"Unable to get players:{ex.Message}", "OK");
+        }
+        finally
+        {
+
+        }
+    }*/
 }

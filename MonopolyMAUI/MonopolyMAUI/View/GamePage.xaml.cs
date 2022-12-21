@@ -26,7 +26,9 @@ public partial class GamePage : ContentPage/* : StartGame*/
     public void OnPressedImageButton(object sender, EventArgs e)
     {
         var imageButton = (ImageButton)sender;
-        //imageButton.Id
+        var name = imageButton.StyleId;
+        /*Можно попробовать TapGestureRecognizer у Image.GestureRecognizers и по нажатию на левую кнопку - просмотр инфы, на левую - окно покупки или продажи домов как вариант*/
+        //Как получать картинки для вывода 
         //Элементы можно связывать через Uid
         //TODO сделать так, чтобы при нажатии ImageButton появлялся FlyOut для описания недвижимости
     }
@@ -63,7 +65,7 @@ public partial class GamePage : ContentPage/* : StartGame*/
                                  Stroke="Black" 
                                  HorizontalOptions="Center" 
                                  ZIndex="10"/>
-    Цвет принадлежности игроку: <Label HeightRequest="5" ClassId="?" BackgroundColor="Red" ZIndex="-10"/>
+    Цвет принадлежности игроку: <Label HeightRequest="5" VerticalOptions="End" BackgroundColor="Red" ZIndex="1"/>
     Дома и отели: <Image Source="house.png" HeightRequest="12" WidthRequest="12" />
                             <Image Source="hotel.png" HeightRequest="12" WidthRequest="12" />*/
 
