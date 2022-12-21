@@ -25,6 +25,7 @@
 
         <Entry Placeholder="Your nickname"
                TextColor="White"
+               IsEnabled="{Binding IsNotBusy}"
                IsVisible="{Binding IsNotBusy}"
                Text="{Binding UserName}"
                VerticalOptions="Center" 
@@ -32,6 +33,7 @@
         
         <Button Text="Submit"
                 IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding IsNotBusy}"
                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:StartGameViewModel}}, Path=SubmitCommand}"
                 HorizontalOptions="{StaticResource horzOptions}"
                 VerticalOptions="{StaticResource vertOptions}"
@@ -41,6 +43,7 @@
         
         <Button Text="Go Back"
                 IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding IsNotBusy}"
                 Command="{Binding GoBackCommand}" 
                 HorizontalOptions="{StaticResource horzOptions}"
                 VerticalOptions="{StaticResource vertOptions}"
@@ -48,5 +51,18 @@
                 FontSize="{StaticResource fontSize}" 
                 Margin="{StaticResource margin}"
                 />
+        <Label IsVisible="{Binding IsBusy}" 
+               Text="Ожидаем других игроков..."
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Center"
+               TextColor="Blue"
+               FontSize="25"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           Margin="20"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           Color="Blue"/>
     </VerticalStackLayout>
 </ContentPage>

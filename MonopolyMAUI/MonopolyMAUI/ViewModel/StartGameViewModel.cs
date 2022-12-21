@@ -62,6 +62,7 @@ public partial class StartGameViewModel : BaseViewModel
         {
             IsBusy = true;
             Players.Add(new User() { Nickname = UserName });
+            await Task.Delay(5000);//Убрать
             //var players = await playerService.GetPlayersFromJsonAsync();/*Наверное,вот тут нужно ответ с сервера*/
             //Сделать анимацию в StartGame.xaml.cs
             /*if (Players.Count > 0)
