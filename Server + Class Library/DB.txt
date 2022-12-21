@@ -1,0 +1,66 @@
+CREATE DATABASE MonopolyDB;
+
+
+CREATE TABLE [dbo].[LandSetsDB] (
+    [Set]        VARCHAR (100) NOT NULL,
+    [LType]      INT           NOT NULL,
+    [HousePrice] INT           NULL,
+    PRIMARY KEY CLUSTERED ([Set] ASC)
+);
+CREATE TABLE [dbo].[LandCardDb] (
+    [Name]        VARCHAR (100)  NOT NULL,
+    [RussianName] NVARCHAR (100) NOT NULL,
+    [Set]         VARCHAR (100)  NOT NULL,
+    [Price]       INT            NOT NULL,
+    [Rent0]       INT            NULL,
+    [Rent1]       INT            NULL,
+    [Rent2]       INT            NULL,
+    [Rent3]       INT            NULL,
+    [Rent4]       INT            NULL,
+    [Rent5]       INT            NULL,
+    PRIMARY KEY CLUSTERED ([Name] ASC),
+    FOREIGN KEY ([Set]) REFERENCES [dbo].[LandSetsDB] ([Set])
+);
+
+
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Catering', 0, 150)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Companies', 2, NULL)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Entertainments', 0, 50)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Infrastructure', 0, 100)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Networks', 0, 150)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Resort', 0, 200)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Roads', 0, 50)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Seaports', 1, NULL)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Streets', 0, 100)
+INSERT INTO [dbo].[LandSetsDB] ([Set], [LType], [HousePrice]) VALUES (N'Transport', 0, 200)
+
+
+
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Airline company', N'Авиакомпания', N'Transport', 320, 28, 150, 450, 1000, 1200, 1400)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Aqua Park', N'Аквапарк', N'Entertainments', 100, 6, 30, 90, 270, 400, 550)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Bar', N'Бар', N'Catering', 220, 18, 90, 250, 700, 875, 1050)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Business Quarter', N'Деловой квартал', N'Infrastructure', 140, 10, 50, 150, 450, 625, 750)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'City park', N'Городской парк', N'Entertainments', 100, 6, 30, 90, 270, 400, 550)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Computers', N'Компьютеры', N'Networks', 260, 22, 110, 330, 800, 975, 1150)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'East Seaport', N'Восточный морской порт', N'Seaports', 200, 25, 50, 100, 200, NULL, NULL)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Electric Company', N'Электрическая компания', N'Companies', 150, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Hotel Resort', N'Гостиничный комплекс', N'Resort', 400, 50, 200, 600, 1400, 1700, 2000)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Internet', N'Интернет', N'Networks', 260, 22, 110, 330, 800, 975, 1150)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Main Highway', N'Главное шоссе', N'Roads', 60, 4, 20, 60, 180, 320, 450)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Mobile Communication', N'Сотовая связь', N'Networks', 280, 24, 120, 360, 850, 1025, 1200)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Night Club', N'Ночной клуб', N'Catering', 220, 18, 90, 250, 700, 875, 1050)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'North Seaport', N'Северный морской порт', N'Seaports', 200, 25, 50, 100, 200, NULL, NULL)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Old Road', N'Старая дорога', N'Roads', 60, 2, 10, 30, 90, 160, 250)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Prospect Mira', N'Проспект мира', N'Streets', 180, 14, 70, 200, 550, 750, 950)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Puskin Street', N'Улица Пушкина', N'Streets', 180, 14, 70, 200, 550, 750, 950)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Railway', N'Железная дорога', N'Transport', 300, 26, 130, 390, 900, 1100, 1275)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Resident Area', N'Спальный район', N'Infrastructure', 140, 10, 50, 150, 450, 625, 750)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Resort Zone', N'Курортная зона', N'Resort', 350, 35, 175, 500, 1100, 1300, 1500)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Restaurant', N'Ресторан', N'Catering', 240, 20, 100, 300, 750, 925, 1100)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Sea Transportation', N'Морские перевозки', N'Transport', 300, 26, 130, 390, 900, 1100, 1275)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Ski Resort', N'Горнолыжный курорт', N'Entertainments', 120, 8, 40, 100, 300, 450, 600)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'South Seaport', N'Южный морской порт', N'Seaports', 200, 25, 50, 100, 200, NULL, NULL)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Traiding Platform', N'Торговая площадь', N'Infrastructure', 160, 12, 60, 180, 500, 700, 900)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Victory Avenue', N'Проспект Победы', N'Streets', 200, 16, 80, 220, 600, 800, 1000)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'Water Supply Company', N'Водопроводная компания', N'Companies', 150, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT INTO [dbo].[LandCardDb] ([Name], [RussianName], [Set], [Price], [Rent0], [Rent1], [Rent2], [Rent3], [Rent4], [Rent5]) VALUES (N'West Seaport', N'Западный морской порт', N'Seaports', 200, 25, 50, 100, 200, NULL, NULL)
