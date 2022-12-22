@@ -199,7 +199,6 @@ namespace TCPServer
         internal void UpdateStatus()
         {
             QueuePacketSend(XPacketConverter.Serialize(XPacketType.UpdateStatus, new UpdateClientStatus {
-                FieldPos = PlayerEntity.FieldLocation,
                 InJail= PlayerEntity.InJail,
                 JailTurns = PlayerEntity.JailTurns,
                 Bankruptcy = PlayerEntity.Bankrupt
@@ -208,7 +207,10 @@ namespace TCPServer
 
         internal void UpdateBalance()
         {
-
+            QueuePacketSend(XPacketConverter.Serialize(XPacketType.UpdateBalance, new UpdateClientBalance {
+                NewMoney = PlayerEntity.Money,
+                NewPrisonKeysCount= PlayerEntity.PrisonKeysCount,
+                }).ToPacket());
         }
     }
 }

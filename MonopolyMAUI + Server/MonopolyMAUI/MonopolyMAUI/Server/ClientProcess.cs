@@ -8,23 +8,22 @@ using XProtocol.Serializator;
 using XProtocol.Packets.Client;
 using XProtocol.Packets.Client_Server;
 using XProtocol.Packets.Server;
-using Monopoly_class_library;
 
 namespace MonopolyMAUI.Server
 {
     internal static class ClientProcess
     {
-        static XClient client;
+        internal static XClient Client;
         internal static void RunClient()
         {
             //Console.Title = "XClient";
             //Console.ForegroundColor = ConsoleColor.White;
 
-            client = new XClient();
-            DialogueMethods.client = client;
+            Client = new XClient();
+            DialogueMethods.client = Client;
 
-            client.OnPacketRecieve += OnPacketRecieve;
-            client.Connect("127.0.0.1", 4910);
+            Client.OnPacketRecieve += OnPacketRecieve;
+            Client.Connect("127.0.0.1", 4910);
 
             var rand = new Random();
 
@@ -94,7 +93,7 @@ namespace MonopolyMAUI.Server
             {
                 case ServerRequestCode.ApproveGame:
                     DialogueFields.ApproveGameRequested = true;
-                    client.QueuePacketSend(XPacketConverter.Serialize(
+                    Client.QueuePacketSend(XPacketConverter.Serialize(
                         XPacketType.ClientSimpleResponce,
                         new ClientSimpleResponce()
                         {
@@ -109,24 +108,30 @@ namespace MonopolyMAUI.Server
         {
             var res = XPacketConverter.Deserialize<CubesThrowResult>(packet);
 
+            Client.UserPlayerEntity.Move(res.FirstCube, res.SecondCube);
         }
 
         private static void ProcessUpdateStatus(XPacket packet)
         {
             var stat = XPacketConverter.Deserialize<UpdateClientStatus>(packet);
 
-            client.PlayerEntity.Bankrupt = stat.Bankruptcy;
-            client.PlayerEntity.InJail = stat.InJail;
-            client.PlayerEntity.JailTurns = stat.JailTurns;
-            client.PlayerEntity.FieldLocation = stat.FieldPos;
+            while(Client.UserPlayerEntity == null)
+                Thread.Sleep(50);
+
+            Client.UserPlayerEntity.PlayerEntity.Bankrupt = stat.Bankruptcy;
+            Client.UserPlayerEntity.PlayerEntity.InJail = stat.InJail;
+            Client.UserPlayerEntity.PlayerEntity.JailTurns = stat.JailTurns;
         }
 
         private static void ProcessUpdateBalance(XPacket packet)
         {
             var bal = XPacketConverter.Deserialize<UpdateClientBalance>(packet);
 
-            client.PlayerEntity.Money = bal.NewMoney;
-            client.PlayerEntity.PrisonKeysCount = bal.NewPrisonKeysCount;
+            while(Client.UserPlayerEntity == null)
+                Thread.Sleep(50);
+
+            Client.UserPlayerEntity.UpdateMoney(bal.NewMoney);
+            Client.UserPlayerEntity.PlayerEntity.PrisonKeysCount = bal.NewPrisonKeysCount;
         }
     }
 }

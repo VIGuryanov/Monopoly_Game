@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Monopoly_class_library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Monopoly_class_library;
 
 namespace MonopolyMAUI.Server
 {
@@ -15,10 +15,9 @@ namespace MonopolyMAUI.Server
 
         private readonly Queue<byte[]> _packetSendingQueue = new Queue<byte[]>();
 
+        internal User_Player UserPlayerEntity;
+
         private Socket _socket;
-
-        internal Player PlayerEntity = new();
-
         private IPEndPoint _serverEndPoint;
 
         public void Connect(string ip, int port)
@@ -30,14 +29,14 @@ namespace MonopolyMAUI.Server
         {
             _serverEndPoint = server;
 
-            var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());  
+            var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
             var ipAddress = ipHostInfo.AddressList[1];
 
             _socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _socket.Connect(_serverEndPoint);
 
-            Task.Run((Action) RecievePackets);
-            Task.Run((Action) SendPackets);
+            Task.Run((Action)RecievePackets);
+            Task.Run((Action)SendPackets);
         }
 
         public void QueuePacketSend(byte[] packet)
@@ -61,7 +60,7 @@ namespace MonopolyMAUI.Server
                 {
                     if (b != 0xFF) return true;
                     return buff[i + 1] != 0;
-                }).Concat(new byte[] {0xFF, 0}).ToArray();
+                }).Concat(new byte[] { 0xFF, 0 }).ToArray();
 
                 OnPacketRecieve?.Invoke(buff);
             }

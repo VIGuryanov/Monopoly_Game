@@ -68,9 +68,12 @@ public partial class StartGameViewModel : BaseViewModel
 
             var rnd = new Random();
             foreach (var nick in playersNicks)
-            {
                 Players.Add(new User() { Nickname = nick, Color = Color.FromRgb(rnd.Next(255), rnd.Next(255), rnd.Next(255)) });
-            }
+
+            PlayersList.Players = Players.Select(x=>new User_Player {UserEntity = x, PlayerEntity = new Monopoly_class_library.Player() }).ToArray();
+            foreach(var userPlayer in PlayersList.Players)
+                if(userPlayer.UserEntity.Nickname == UserName)
+                    ClientProcess.Client.UserPlayerEntity = userPlayer;
             //var players = await playerService.GetPlayersFromJsonAsync();/*Наверное,вот тут нужно ответ с сервера*/
             //Сделать анимацию в StartGame.xaml.cs
             /*if (Players.Count > 0)

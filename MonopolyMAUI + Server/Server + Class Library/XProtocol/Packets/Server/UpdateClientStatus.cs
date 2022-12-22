@@ -10,12 +10,10 @@ namespace XProtocol.Packets.Server
     public class UpdateClientStatus
     {
         [XField(0)]
-        public int FieldPos;
-        [XField(1)]
         public bool InJail;
-        [XField(2)]
+        [XField(1)]
         public int JailTurns;
-        [XField(3)]
+        [XField(2)]
         public bool Bankruptcy;
     }
 }
