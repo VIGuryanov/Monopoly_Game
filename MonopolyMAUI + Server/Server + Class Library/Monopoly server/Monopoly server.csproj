@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>Monopoly_server</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Monopoly class library\Monopoly class library.csproj" />
+    <ProjectReference Include="..\XProtocol\XProtocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MyORM">
+      <HintPath>..\MyORM\bin\Debug\net6.0\MyORM.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
