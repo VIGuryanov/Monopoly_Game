@@ -37,7 +37,7 @@ public partial class GameViewModel : StartGameViewModel
             {
                 if(buildings.Count == 5)
                 {
-                    //await Shell.Current.DisplayAlert("Ошибка", "Вы не можете построить больше домов!", "OK");
+                    await Shell.Current.DisplayAlert("Ошибка", "Вы не можете построить больше домов!", "OK");
                 }
                 if (buildings.Count == 4)
                     buildings.Add(new Image
@@ -58,7 +58,7 @@ public partial class GameViewModel : StartGameViewModel
         }
         if (buildings.Count == 0)
         {
-            //await Shell.Current.DisplayAlert("Ошибка", "У вас нет домов!", "OK");
+            await Shell.Current.DisplayAlert("Ошибка", "У вас нет домов!", "OK");
         }
         if(buildings.Count > 0)
             buildings.RemoveAt(buildings.Count-1);

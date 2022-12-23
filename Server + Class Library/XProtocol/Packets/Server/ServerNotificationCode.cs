@@ -9,6 +9,7 @@ namespace XProtocol.Packets.Server
     public enum ServerNotificationCode
     {
         OneRejectedGame,
-        GameApproveTimeout
+        GameApproveTimeout,
+        GameEnded
     }
 }

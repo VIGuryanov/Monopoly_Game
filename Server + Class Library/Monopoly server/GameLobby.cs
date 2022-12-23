@@ -11,6 +11,7 @@ using XProtocol.Packets.Client_Server;
 using XProtocol.Packets.Server;
 using Monopoly_class_library;
 using Monopoly_server.GameLogic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Monopoly_server
 {
@@ -148,6 +149,10 @@ namespace Monopoly_server
                 {
                     if (!players[i].PlayerEntity.Bankrupt)
                     {
+                        if(players.Where(x=>x.PlayerEntity.Bankrupt == true).Count()==1)
+                            foreach(var pl in players)
+                                pl.QueuePacketSend(XPacketConverter.Serialize(XPacketType.ServerNotification, new ServerNotification { NotificationCode = (sbyte)ServerNotificationCode.GameEnded}).ToPacket());
+
                         players[i].GameStatus = ClientGameStatus.MakesTurn;
                         if (players[i].PlayerEntity.InJail)
                         {

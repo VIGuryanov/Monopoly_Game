@@ -60,7 +60,7 @@ public partial class StartGameViewModel : BaseViewModel
             IsBusy = true;
             
             await Task.Run(() => DialogueMethods.SendMyNickname(UserName));
-            var playersNicks = await Task.Run(DialogueMethods.GetTeamNickNames);
+            var playersNicks = /*new string[]{ };*/ await Task.Run(DialogueMethods.GetTeamNickNames);
 
             var rnd = new Random();
             foreach (var nick in playersNicks)

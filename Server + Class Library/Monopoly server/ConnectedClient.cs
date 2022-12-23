@@ -42,23 +42,31 @@ namespace TCPServer
 
         private void ProcessIncomingPackets()
         {
-            while (true) // Слушаем пакеты, пока клиент не отключится.
+            try
             {
-                var buff = new byte[256]; // Максимальный размер пакета - 256 байт.
-                Client.Receive(buff);
-
-                buff = buff.TakeWhile((b, i) =>
+                while (true) // Слушаем пакеты, пока клиент не отключится.
                 {
-                    if (b != 0xFF) return true;
-                    return buff[i + 1] != 0;
-                }).Concat(new byte[] { 0xFF, 0 }).ToArray();
+                    var buff = new byte[256]; // Максимальный размер пакета - 256 байт.
+                    Client.Receive(buff);
 
-                var parsed = XPacket.Parse(buff);
+                    buff = buff.TakeWhile((b, i) =>
+                    {
+                        if (b != 0xFF) return true;
+                        return buff[i + 1] != 0;
+                    }).Concat(new byte[] { 0xFF, 0 }).ToArray();
 
-                if (parsed != null)
-                {
-                    ProcessIncomingPacket(parsed);
+                    var parsed = XPacket.Parse(buff);
+
+                    if (parsed != null)
+                    {
+                        ProcessIncomingPacket(parsed);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                PlayerEntity.Bankrupt = true;
+                UpdateStatus();
             }
         }
 
@@ -188,19 +196,24 @@ namespace TCPServer
 
         private void SendPackets()
         {
-            while (true)
+            try
             {
-                if (_packetSendingQueue.Count == 0)
+                while (true)
                 {
+                    if (_packetSendingQueue.Count == 0)
+                    {
+                        Thread.Sleep(100);
+                        continue;
+                    }
+
+                    var packet = _packetSendingQueue.Dequeue();
+                    Client.Send(packet);
+
                     Thread.Sleep(100);
-                    continue;
                 }
-
-                var packet = _packetSendingQueue.Dequeue();
-                Client.Send(packet);
-
-                Thread.Sleep(100);
             }
+            catch(Exception e)
+            { }
         }
 
         internal void UpdateStatus()

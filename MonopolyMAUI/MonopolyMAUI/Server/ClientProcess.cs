@@ -8,6 +8,7 @@ using XProtocol.Serializator;
 using XProtocol.Packets.Client;
 using XProtocol.Packets.Client_Server;
 using XProtocol.Packets.Server;
+using MonopolyMAUI.View;
 
 namespace MonopolyMAUI.Server
 {
@@ -81,6 +82,9 @@ namespace MonopolyMAUI.Server
                     break;
                 case XPacketType.UpdateBalance:
                     ProcessUpdateBalance(packet);
+                    break;
+                case XPacketType.ServerNotification:
+                    ProcessServerNotification(packet);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -157,6 +161,29 @@ namespace MonopolyMAUI.Server
 
             PlayersList.Players[bal.PlayerID].UpdateMoney(bal.NewMoney);
             PlayersList.Players[bal.PlayerID].PlayerEntity.PrisonKeysCount = bal.NewPrisonKeysCount;
+        }
+
+        private static void ProcessServerNotification(XPacket packet)
+        {
+            var not = XPacketConverter.Deserialize<ServerNotification>(packet);
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                switch ((ServerNotificationCode)not.NotificationCode)
+                {
+
+                    case ServerNotificationCode.GameApproveTimeout:
+                        GamePage.Instance.DisplayAlert("Отмена игры", "Игроки не отправили подтверждение об участии в игре", "Ок");
+                        break;
+                    case ServerNotificationCode.OneRejectedGame:
+                        GamePage.Instance.DisplayAlert("Отмена игры", "Один из пользователей отклонил игру", "Ок");
+                        break;
+                    case ServerNotificationCode.GameEnded:
+                        var winner = PlayersList.Players.Where(x=>x.PlayerEntity.Bankrupt == false).First();
+                        GamePage.Instance.DisplayAlert("Игра окончена", $"{winner.UserEntity.Nickname} победил", "Ок");
+                        break;
+                }
+            });
         }
     }
 }
