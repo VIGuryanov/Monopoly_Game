@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonopolyMAUI.View.RulesPage"
+             xmlns:viewmodel="clr-namespace:MonopolyMAUI.ViewModel"
+             x:DataType="viewmodel:RulesViewModel"
+             Title=""
+             BackgroundColor="#262c2f">
+    <ContentPage.Resources>
+        <LayoutOptions x:Key="horzOptions"
+                       Alignment="Center" />
+        <LayoutOptions x:Key="vertOptions"
+                       Alignment="Center" />
+        <x:Double x:Key="borderWidth">3</x:Double>
+        <x:Double x:Key="fontSize">24</x:Double>
+        <x:Double x:Key="margin">20</x:Double>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" 
+                         HorizontalOptions="Center">
+            
+            <Label 
+            Text="Ход игры"
+            FontSize="25"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            TextColor="BlueViolet"
+            Padding="20"
+            />
+
+            <Label Text="Порядок ходов"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Padding="10"
+               FontSize="20"
+               TextColor="OrangeRed">
+            </Label>
+
+            <Image Source="dices.png"
+                   HeightRequest="50"
+                   WidthRequest="50">
+            </Image>
+            
+            <Label FontSize="20"
+                TextColor="Aquamarine"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+                <Label.Text>
+                    В начале игры выясняется, в какой последовательности будут ходить игроки.
+                    Кто получит наибольшую комбинацию, тот ходит первым и так далее.
+                    Вам не нужно кидать кубики самостоятельно, система сделает это за вас.
+                </Label.Text>
+            </Label>
+
+            <Label FontSize="20"
+                Padding="20" 
+                TextColor="Aquamarine"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+                <Label.Text>
+                    Если вдруг вы выбиваете дубль, фишка перемещается на нужную клетку
+                    и игральная кость кидается повторно. Если же вы выбиваете три дубля подряд, 
+                    то вы сразу же попадаете в тюрьму
+                </Label.Text>
+            </Label>
+
+            <Label Text="Прохождение стартого поля"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Padding="10"
+               FontSize="20"
+               TextColor="OrangeRed">
+            </Label>
+
+            <Label FontSize="20"
+                Padding="20" 
+                TextColor="Aquamarine"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center">
+                <Label.Text>
+                    Если вдруг вы выбиваете дубль, фишка перемещается на нужную клетку
+                    и игральная кость кидается повторно. Если же вы выбиваете три дубля подряд, 
+                    то вы сразу же попадаете в тюрьму
+                </Label.Text>
+            </Label>
+
+            <Label Text="Покупка недвижимости"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Padding="10"
+               FontSize="20"
+               TextColor="OrangeRed">
+            </Label>
+
+            <Button Text="Go Back"
+               Command="{Binding GoBackCommand}" 
+                HorizontalOptions="{StaticResource horzOptions}"
+                VerticalOptions="{StaticResource vertOptions}"
+                BorderWidth="{StaticResource borderWidth}"
+                FontSize="{StaticResource fontSize}" 
+                Margin="{StaticResource margin}"
+                />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
