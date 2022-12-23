@@ -19,6 +19,7 @@
                          VerticalOptions="CenterAndExpand">
 
         <Label Text="{Binding NicknameError}"
+               IsVisible="{Binding IsNotBusy}"
                TextColor="Red"
                VerticalOptions="Center" 
                HorizontalOptions="Center"/>

@@ -1,14 +1,18 @@
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using MonopolyMAUI.ViewModel;
 
 namespace MonopolyMAUI.View;
 
 public partial class GamePage : ContentPage/* : StartGame*/
 {
+    Grid mainGrid;
+    Image info;
 	public GamePage(GameViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
+        mainGrid = this.FindByName<Grid>("MainGrid");
         //Пример добавления цвета вниз карточки
         /*var vertical = this.FindByName<VerticalStackLayout>("Highway_Realty");
         vertical.Add(new Label()
@@ -16,11 +20,62 @@ public partial class GamePage : ContentPage/* : StartGame*/
             HeightRequest = 5,
             BackgroundColor = Colors.Red,
         });*/
+
+        var players = vm.players;
+        var stack = this.FindByName<VerticalStackLayout>("Players_0");
+        foreach (var player in players)
+            stack.Add(new Ellipse()
+            {
+                HeightRequest = 5,
+                VerticalOptions = LayoutOptions.End,
+                BackgroundColor = Colors.Red,
+                ZIndex = 1,
+                StyleId = $"Player_{player.Id}"
+            });
+
+        var player1 = stack.FindByName<Label>("Player_1");//Или просто никнейм вместо Player_1
+        stack.Remove(player1);
     }
 
     public async Task TempAsync(object sender, EventArgs e)
     {
+     
+    }
+
+    void TappedLeftRecognizer(object sender, TappedEventArgs args)
+    {
+        var trigger = new Trigger(typeof(Entry))
+        {
+            Property = IsFocusedProperty,
+            Value = true
+        };
+        if (info != null && mainGrid.Contains(info))
+            mainGrid.Remove(info);
         
+        var tapGestureRecognizer = (Image)sender;
+        info = new Image
+        {
+            Source = ImageSource.FromFile($"{args.Parameter}.png"),
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center,
+            HeightRequest = 210,
+            WidthRequest = 117,
+            
+        };
+
+        var gestureRecognizer = new TapGestureRecognizer
+        {
+            Buttons = ButtonsMask.Primary
+        };
+
+        gestureRecognizer.Tapped += (s, e) =>
+        {          
+            mainGrid.Remove(info);
+        };
+
+        info.GestureRecognizers.Add(gestureRecognizer);
+        
+        mainGrid.Add(info);
     }
 
     public void OnPressedImageButton(object sender, EventArgs e)

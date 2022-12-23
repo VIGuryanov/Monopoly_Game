@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace MonopolyMAUI.Models
 {
-    public class User
+    public partial class User : ObservableObject
     {
-        public string Nickname { get; set; }
-        public int Id { get; set; }
-        public Color Color { get; set; }
-        public int Amount { get; set; }
+        [ObservableProperty]
+        public string nickname;
+
+        [ObservableProperty]
+        public int id;
+
+        [ObservableProperty]
+        public Color color;
+
+        [ObservableProperty]
+        public int amount;
     }
 }

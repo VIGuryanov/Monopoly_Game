@@ -24,6 +24,9 @@ public partial class StartGameViewModel : BaseViewModel
     }
 
     [ObservableProperty]
+    User user;
+
+    [ObservableProperty]
     string userName;
 
     [ObservableProperty]
@@ -42,33 +45,21 @@ public partial class StartGameViewModel : BaseViewModel
         {
             NicknameError = "Empty nickname! Please enter your nickname";
             UserName = string.Empty;
-            return;//Тут надо написать про плохой никнейм иначе ожидание подключения других пользователей
+            return;
         }
         if (UserName.Length >= 18)
         {
             NicknameError = "To big nickname!";
             UserName = string.Empty;
-            return;//Тут надо написать про плохой никнейм иначе ожидание подключения других пользователей
+            return;
         }
         //TODO: возможно придётся делать проверку на одинаковые никнеймы(вопрос где именно? тут или на сервере?
-        //или сделать коллекцию, и уже там все ники будут,
-        //но если всегда разные клиенты запускаются, то будет ли там инфа по всем пользователям?(Поэтому надо скорее всего с серва отправлять)
-
-        //TODO: тут нужно сделать обращение к серверу и подождать других пользователей(подключения всех пользователь)
-        //И здесь нужно продумать добавление игроков в список на странице игры(В видосике про MVVM или навигации говорилось про это)
-        //(и потом просто сделать уже на странице игры кнопку "ГОТОВ")
-        //Players = await ...
         try
         {
             IsBusy = true;
-            Players.Add(new User() { Nickname = UserName });
-            await Task.Delay(5000);//Убрать
-            //var players = await playerService.GetPlayersFromJsonAsync();/*Наверное,вот тут нужно ответ с сервера*/
-            //Сделать анимацию в StartGame.xaml.cs
-            /*if (Players.Count > 0)
-                Players.Clear();
-            foreach (var player in players)
-                Players.Add(player);*/
+            User = new User() { Nickname = UserName };
+            Players.Add(user);
+            await Task.Delay(1000);//Убрать
             await Shell.Current.GoToAsync(nameof(GamePage), new Dictionary<string, object> 
             {
                 {"Players", Players}
@@ -82,33 +73,7 @@ public partial class StartGameViewModel : BaseViewModel
         }
         finally
         {
-            IsBusy = false;
+            //IsBusy = false;
         }
     }
-
-    /*[RelayCommand]
-    async Task GetPlayersAsync()
-    {
-        try
-        {
-            var players = await playerService.GetPlayersFromJsonAsync();
-            if (players?.Count != 0)
-                Players.Clear();
-
-            foreach (var player in players)
-                Players.Add(player);
-        }
-        catch (Exception ex)
-        {
-#if DEBUG
-            Debug.WriteLine(ex);
-#endif
-            //Этого делать не следует!, просто в качестве примера
-            await Shell.Current.DisplayAlert("Error!", $"Unable to get players:{ex.Message}", "OK");
-        }
-        finally
-        {
-
-        }
-    }*/
 }

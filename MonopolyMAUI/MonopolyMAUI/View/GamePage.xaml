@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:MonopolyMAUI.Models"
-             xmlns:view="clr-namespace:MonopolyMAUI.ViewModel"
+             xmlns:viewmodel="clr-namespace:MonopolyMAUI.ViewModel"
              x:Class="MonopolyMAUI.View.GamePage"
-             x:DataType="view:GameViewModel"
+             x:DataType="viewmodel:GameViewModel"
              BackgroundColor="#262c2f"
              Title="GamePage"
              >
@@ -18,7 +18,7 @@
         <x:Double x:Key="margin">20</x:Double>
     </ContentPage.Resources>
 
-    <Grid>
+    <Grid x:Name="MainGrid">
         <CollectionView HorizontalOptions="Start" VerticalOptions="Center" ItemsSource="{Binding Players}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:User">
@@ -64,7 +64,7 @@
 
 
             <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Start">
-                <Grid Padding="0" x:Uid="0">
+                <Grid Padding="0" x:Name="Id_0">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_0">
                         
                     </VerticalStackLayout>
@@ -76,10 +76,22 @@
 
 
             <Border Grid.Column="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="1" >
+                <Grid Padding="0" x:Name="Id_1" >
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_1">
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Old_Road" Pressed="OnPressedImageButton" Source="Road.png" ZIndex="-1"/>
+                    <Image Source="Road.png" ZIndex="-1" x:Name="Old_Road">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Old_RoadInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="1"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    
                     <VerticalStackLayout VerticalOptions="End" ZIndex="2" x:Name="Realty_1">
                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_1">
 
@@ -89,7 +101,7 @@
             </Border>
 
             <Border Grid.Column="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Treasury">
-                <Grid Padding="0" x:Uid="2">
+                <Grid Padding="0" x:Name="Id_2">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_2">
                     </VerticalStackLayout>
                     
@@ -101,8 +113,19 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0" 
-                    x:Uid="3">
-                    <ImageButton x:Name="Highway" Pressed="OnPressedImageButton" Source="Highway.png" ZIndex="-1"/>
+                    x:Name="Id_3">
+                    <Image BackgroundColor="White" Source="Highway.png" ZIndex="-1" x:Name="Highway">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Highway_RoadInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="3"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_3">
                     </VerticalStackLayout>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_3">
@@ -115,7 +138,7 @@
             <Border Grid.Column="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
                 <Grid HorizontalOptions="Center"
                       Padding="0"
-                      x:Uid="4">
+                      x:Name="Id_4">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_4">
                         
                     </VerticalStackLayout>
@@ -127,11 +150,22 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0"
-                    x:Uid="5">
+                    x:Name="Id_5">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_5">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="West_SeaPort" Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Sea_Port.png" ZIndex="-1" x:Name="West_Port">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="West_PortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="5"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_5">
 
                     </VerticalStackLayout>
@@ -142,11 +176,22 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0"
-                    x:Uid="6">
+                    x:Name="Id_6">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_6">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="AquaPark" Pressed="OnPressedImageButton" Source="Aqua_Park.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Aqua_Park.png" ZIndex="-1" x:Name="Aqua_Park">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="AquaParkInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="6"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_6">
                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_6">
                         </HorizontalStackLayout>
@@ -155,7 +200,7 @@
             </Border>
 
             <Border Grid.Column="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="7">
+                <Grid Padding="0" x:Name="Id_7">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_7">
                     </VerticalStackLayout>
 
@@ -167,11 +212,22 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0"
-                    x:Uid="8">
+                    x:Name="Id_8">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_8">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="CityPark" Pressed="OnPressedImageButton" Source="Park.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Park.png" ZIndex="-1" x:Name="CityPark">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="CityParkInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="8"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_8">
                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_8">
                         </HorizontalStackLayout>
@@ -183,11 +239,22 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0" 
-                    x:Uid="9">
+                    x:Name="Id_9">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="SkiResort_Players">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="SkiResort" Pressed="OnPressedImageButton" Source="Ski_Resort.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Ski_Resort.png" ZIndex="-1" x:Name="SkiResort">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="SkiResortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="9"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_9">
                         <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_9">
                         </HorizontalStackLayout>
@@ -196,7 +263,7 @@
             </Border>
 
             <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" Grid.Column="10">
-                <Grid Padding="0" x:Uid="10">
+                <Grid Padding="0" x:Name="Id_10">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_10">
                     </VerticalStackLayout>
                     <Image Source="prison.png"
@@ -205,131 +272,26 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="39">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_39">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Hotel_Resort" Pressed="OnPressedImageButton" Source="Hotel_Resort.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_39">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_39">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-
-            <Border Grid.Row="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="38">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_38">
-                    </VerticalStackLayout>
-
-                    <Image Source="purchase.png" BackgroundColor="White" ZIndex="-1"/>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="37">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_37">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Resort" Pressed="OnPressedImageButton" Source="Resort.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_37">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_37">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="36">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_36">
-                    </VerticalStackLayout>
-
-                    <Image Source="question.png" BackgroundColor="White" ZIndex="-1"/>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="35">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_35">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="South_SeaPort" Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_35">
-                        
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="34">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_34">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Plane" Pressed="OnPressedImageButton" Source="Plane.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_34">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_34">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="33">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_33">
-                    </VerticalStackLayout>
-                    
-                    <Image Source="treasury.png" BackgroundColor="White" ZIndex="-1"/>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="8" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="32">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_32">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Train" Pressed="OnPressedImageButton" Source="Train.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_32">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_32">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="31">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_31">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Ship" Pressed="OnPressedImageButton" Source="Cargo_Ship.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_31">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_31">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="30">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_30">
-
-                    </VerticalStackLayout>
-                    <Image Source="Police_Station.png"
-                           BackgroundColor="White" 
-                           ZIndex="-1"/>
-                </Grid>
-            </Border>
-
             <Border Grid.Column="10" Grid.Row="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
                 <Grid Padding="0"
-                      x:Uid="11">
+                      x:Name="Id_11">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_11">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Social" Pressed="OnPressedImageButton" Source="Social_Housing.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Social_Housing.png" ZIndex="-1" x:Name="Social">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="SocialInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="11"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_11">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_11">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_11">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
@@ -338,11 +300,22 @@
 
             <Border Grid.Column="10" Grid.Row="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
                 <Grid Padding="0" 
-                      x:Uid="12">
+                      x:Name="Id_12">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_12">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Electricity_Company" Pressed="OnPressedImageButton" Source="Electricity_Company.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Electricity_Company.png" ZIndex="-1" x:Name="Electricity_Company">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="ElectricityInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="12"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_12">
 
                     </VerticalStackLayout>
@@ -351,13 +324,24 @@
 
             <Border Grid.Column="10" Grid.Row="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
                 <Grid Padding="0"
-                      x:Uid="13">
+                      x:Name="Id_13">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_13">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Busyness" Pressed="OnPressedImageButton" Source="Busyness_Quarter.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Busyness_Quarter.png" ZIndex="-1" x:Name="Busyness">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="BusynessInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="13"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_13">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_13">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_13">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
@@ -365,13 +349,24 @@
 
             <Border Grid.Column="10" Grid.Row="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
                 <Grid Padding="0"
-                      x:Uid="14">
+                      x:Name="Id_14">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_14">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="MarketPlace" Pressed="OnPressedImageButton" Source="Marketplace.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Marketplace.png" ZIndex="-1" x:Name="MarketPlace">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="MarketplaceInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="14"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_14">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_14">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_14">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
@@ -381,11 +376,22 @@
                 <Grid 
                     HorizontalOptions="Center"
                     Padding="0"
-                    x:Uid="15">
+                    x:Name="Id_15">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="North_SeaPort_Players">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="North_SeaPort" Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
+                    <Image Source="Sea_Port.png" ZIndex="-1" x:Name="North_Port">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="North_PortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="15"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_15">
 
                     </VerticalStackLayout>
@@ -394,20 +400,31 @@
 
             <Border Grid.Column="10" Grid.Row="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
                 <Grid Padding="0"
-                      x:Uid="16">
+                      x:Name="Id_16">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_16">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Pushkin_Street" Pressed="OnPressedImageButton" Source="Pushkina_Street.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Pushkina_Street.png" ZIndex="-1" x:Name="Pushkin_Street">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Pushkin_StreetInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="16"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_16">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_16">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_16">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
             <Border Grid.Column="10" Grid.Row="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="17">
+                <Grid Padding="0" x:Name="Id_17">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_17">
                     </VerticalStackLayout>
 
@@ -416,33 +433,55 @@
             </Border>
 
             <Border Grid.Column="10" Grid.Row="8" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="18">
+                <Grid Padding="0" x:Name="Id_18">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_18">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Prospect_Mira" Pressed="OnPressedImageButton" Source="Prospect_Mira.png" ZIndex="-1"/>
+                    <Image BackgroundColor="White" Source="Prospect_Mira.png" ZIndex="-1" x:Name="Prospect_Mira">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Prospect_MiraInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="18"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_18">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_18">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_18">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
             <Border Grid.Column="10" Grid.Row="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="19">
+                <Grid Padding="0" x:Name="Id_19">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_19">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Prospect_Pobedy" Pressed="OnPressedImageButton" Source="Prospect_Pobedy.png" ZIndex="-1"/>
+                    <Image Source="Prospect_Pobedy.png" ZIndex="-1" x:Name="Prospect_Pobedy">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Prospect_PobedyInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="19"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
                     <VerticalStackLayout VerticalOptions="End" x:Name="Realty_19">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_19">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_19">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
             <Border Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" Grid.Column="10" Grid.Row="10">
-                <Grid Padding="0" x:Uid="20">
+                <Grid Padding="0" x:Name="Id_20">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_20">
                     </VerticalStackLayout>
                     <Image Source="Parking.png"
@@ -451,100 +490,32 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="29">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_29">
+            <Border Grid.Row="10" Grid.Column="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_21">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_21">
 
                     </VerticalStackLayout>
-                    <ImageButton x:Name="Smartphone" Pressed="OnPressedImageButton" Source="Smartphone.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_29">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_29">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="28">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_28">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Water_Company" Pressed="OnPressedImageButton" Source="Water_Company.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_28">
-
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="27">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_27">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Internet" Pressed="OnPressedImageButton" Source="Internet.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_27">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_27">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid Padding="0" x:Uid="26">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_26">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Computers" Pressed="OnPressedImageButton" Source="Computer.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_26">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_26">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="5" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
-                <Grid 
-                    HorizontalOptions="Center"
-                    Padding="0"
-                    x:Uid="25">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_25">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="East_SeaPort" Pressed="OnPressedImageButton" Source="Sea_Port.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_25">
-
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="24">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_24">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Restaurant" Pressed="OnPressedImageButton" Source="Restaurant.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_24">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_24">
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="10" Grid.Column="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="23">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_23">
-
-                    </VerticalStackLayout>
-                    <ImageButton x:Name="Night_Club" Pressed="OnPressedImageButton" Source="Night_Club.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_23">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_23">
+                    <Image BackgroundColor="White" Source="Pub.png" ZIndex="-1" x:Name="Pub">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="PubInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="21"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_21">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_21">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
             <Border Grid.Row="10" Grid.Column="8"  Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
-                <Grid Padding="0" x:Uid="22">
+                <Grid Padding="0" x:Name="Id_22">
                     <VerticalStackLayout VerticalOptions="Center" x:Name="Players_22">
                     </VerticalStackLayout>
 
@@ -552,19 +523,356 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" x:Name="Pub">
-                <Grid Padding="0" x:Uid="21">
-                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_21">
+            <Border Grid.Row="10" Grid.Column="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_23">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_23">
 
                     </VerticalStackLayout>
-                    <ImageButton Pressed="OnPressedImageButton" Source="Pub.png" ZIndex="-1"/>
-                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_21">
-                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Building_21">
+                    <Image Source="Night_Club.png" ZIndex="-1" x:Name="Night_Club">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="Night_ClubInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="23"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_23">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_23">
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
+            <Border Grid.Row="10" Grid.Column="6" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_24">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_24">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Restaurant.png" ZIndex="-1" x:Name="Restaurant">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="RestaurantInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="24"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_24">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_24">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            
+            <Border Grid.Row="10" Grid.Column="5" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid 
+                    HorizontalOptions="Center"
+                    Padding="0"
+                    x:Name="Id_25">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_25">
+
+                    </VerticalStackLayout>
+                    <Image Source="Sea_Port.png" ZIndex="-1" x:Name="East_SeaPort">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="East_PortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="25"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_25">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_26">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_26">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Computer.png" ZIndex="-1" x:Name="Computers">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="ComputersInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="26"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_26">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_26">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="3" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_27">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_27">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Internet.png" ZIndex="-1" x:Name="Internet">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="InternetInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="27"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_27">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_27">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_28">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_28">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Water_Company.png" ZIndex="-1" x:Name="Water_Company">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="WaterInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="28"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_28">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Grid.Column="1" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_29">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_29">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Smartphone.png" ZIndex="-1" x:Name="Smartphone">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="SmartphoneInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="29"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_29">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_29">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="10" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_30">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_30">
+
+                    </VerticalStackLayout>
+                    <Image Source="Police_Station.png"
+                           BackgroundColor="White" 
+                           ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="9" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_31">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_31">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Cargo_Ship.png" ZIndex="-1" x:Name="Ship">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="ShipInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="31"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_31">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_31">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="8" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_32">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_32">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Train.png" ZIndex="-1" x:Name="Train">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="TrainInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="32"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_32">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_32">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="7" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_33">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_33">
+                    </VerticalStackLayout>
+
+                    <Image Source="treasury.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_34">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_34">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Plane.png" ZIndex="-1" x:Name="Plane">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="PlaneInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="34"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_34">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_34">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_35">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_35">
+
+                    </VerticalStackLayout>
+                    <Image Source="Sea_Port.png" ZIndex="-1" x:Name="South_SeaPort">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="South_PortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="35"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_35">
+
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="4" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_36">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_36">
+                    </VerticalStackLayout>
+
+                    <Image Source="question.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center" >
+                <Grid Padding="0" x:Name="Id_37">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_37">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Resort.png" ZIndex="-1" x:Name="Resort">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="ResortInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="37"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_37">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_37">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_38">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_38">
+                    </VerticalStackLayout>
+
+                    <Image Source="purchase.png" BackgroundColor="White" ZIndex="-1"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" HorizontalOptions="Center">
+                <Grid Padding="0" x:Name="Id_39">
+                    <VerticalStackLayout VerticalOptions="Center" x:Name="Players_39">
+
+                    </VerticalStackLayout>
+                    <Image BackgroundColor="White" Source="Hotel_Resort.png" ZIndex="-1" x:Name="Hotel_Resort">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TappedLeftRecognizer"
+                                                  Buttons="Primary"
+                                                  CommandParameter="HotelInfo"
+                                                  />
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=TappedRightRecognizerCommand}"
+                                                  Buttons="Secondary"
+                                                  CommandParameter="39"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <VerticalStackLayout VerticalOptions="End" x:Name="Realty_39">
+                        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" x:Name="Buildings_39">
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            
         </Grid>
     </Grid>
     
