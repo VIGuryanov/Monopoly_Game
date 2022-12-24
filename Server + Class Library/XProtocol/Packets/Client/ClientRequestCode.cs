@@ -9,6 +9,7 @@ namespace XProtocol.Packets.Client
     public enum ClientRequestCode
     {
         BuyLand,
-        EndTurn
+        EndTurn,
+        Pause 
     }
 }

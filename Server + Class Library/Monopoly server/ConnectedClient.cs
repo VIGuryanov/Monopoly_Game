@@ -14,6 +14,7 @@ using XProtocol.Packets.Client_Server;
 using XProtocol.Packets.Server;
 using XProtocol.Serializator;
 using Monopoly_class_library.FieldCards;
+using System.Collections;
 
 namespace TCPServer
 {
@@ -164,6 +165,9 @@ namespace TCPServer
                     if (GameStatus == ClientGameStatus.MakesTurn)
                         Dialogue.EndedTurn = true;
                     break;
+                case ClientRequestCode.Pause:
+                    Room.Paused = !Room.Paused; 
+                    break;
             }
         }
 
@@ -198,6 +202,11 @@ namespace TCPServer
         {
             try
             {
+                /*if(Room.Paused)
+                {
+                    QueuePacketSend(XPacketConverter.Serialize(new XPacket(XPacketType.ClientSimpleRequest, new ClientSimpleRequest { ReqCode = h}));
+                }*/
+
                 while (true)
                 {
                     if (_packetSendingQueue.Count == 0)
@@ -243,6 +252,7 @@ namespace TCPServer
         {
             foreach (var player in Room.players)
                 player.QueuePacketSend(XPacketConverter.Serialize(XPacketType.CubesThrowResult, new CubesThrowResult { PlayerID = RoomPlayerID, FirstCube = (byte)cubeRes1, SecondCube = (byte)cubeRes2 }).ToPacket());
+            Console.WriteLine(Nick +"  "+ cubeRes1 +"  "+ cubeRes2);
         }
     }
 }

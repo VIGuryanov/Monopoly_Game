@@ -87,6 +87,7 @@ namespace Monopoly_server
         internal List<ConnectedClient> PlayersApprovedGame = new();
         internal List<ConnectedClient> PlayersRejectedGame = new();
         bool approveTimeout;
+        public bool Paused; 
 
         internal GameRoom(ConnectedClient[] plrs)
         {
@@ -184,7 +185,7 @@ namespace Monopoly_server
 
                         GameFieldStepHandler.HandleStep(players[i]);
 
-                        while (!players[i].Dialogue.EndedTurn)
+                        while (!players[i].Dialogue.EndedTurn && !players[i].PlayerEntity.Bankrupt)
                             Thread.Sleep(2000);
                                                 
                         players[i].GameStatus = ClientGameStatus.WaitTurn;
